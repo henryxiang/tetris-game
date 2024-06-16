@@ -7,5 +7,5 @@ if [ "$OS" = "Linux" ]; then
 fi
 
 if [ "$OS" = "Darwin" ]; then
-    c++ $* $(pkg-config --libs --cflags) -std=c++11 -o build/app
+    c++ $* $(pkg-config --libs --cflags raylib) -std=c++11 -o build/app
 fi
