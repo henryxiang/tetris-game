@@ -8,10 +8,10 @@ all: $(EXE)
 
 $(EXE): %: %.c | build
 ifeq ($(OS), Linux)
-	$(CC) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
+	$(CXX) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
 endif
 ifeq ($(OS), Darwin)
-	$(CC) $< `pkg-config --libs --cflags raylib` -o build/$@
+	$(CXX) $< `pkg-config --libs --cflags raylib` -o build/$@
 endif
 
 build:
