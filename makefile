@@ -1,12 +1,11 @@
 OS := $(shell uname -s)
 VPATH := src
-EXE := $(shell find $(VPATH) -name '*.c' -exec basename {} .c \;)
-
+EXE := $(shell find $(VPATH) -name '*.cpp' -exec basename {} .cpp \;)
 
 .PHONY: all
 all: $(EXE)
 
-$(EXE): %: %.c | build
+$(EXE): %: %.cpp | build
 ifeq ($(OS), Linux)
 	$(CXX) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
 endif
