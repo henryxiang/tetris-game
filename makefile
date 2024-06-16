@@ -1,11 +1,17 @@
 OS := $(shell uname -s)
+VPATH := src
+EXE := $(shell find $(VPATH) -name '*.c' -exec basename {} .c \;)
 
-demo: build
+
+.PHONY: all
+all: $(EXE)
+
+$(EXE): %: %.c | build
 ifeq ($(OS), Linux)
-	$(CC) src/demo.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/demo
+	$(CC) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
 endif
 ifeq ($(OS), Darwin)
-	$(CC) src/demo.c `pkg-config --libs --cflags raylib` -o build/demo 
+	$(CC) $< `pkg-config --libs --cflags raylib` -o build/$@
 endif
 
 build:
