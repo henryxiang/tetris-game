@@ -11,7 +11,7 @@ ifeq ($(OS), Linux)
 	$(CXX) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
 endif
 ifeq ($(OS), Darwin)
-	$(CXX) $< `pkg-config --libs --cflags raylib` -o build/$@
+	$(CXX) $< `pkg-config --libs --cflags raylib` -std=c++11 -o build/$@
 endif
 
 build:
