@@ -1,16 +1,12 @@
 OS := $(shell uname -s)
-VPATH := src
-EXE := $(shell find $(VPATH) -name '*.cpp' -exec basename {} .cpp \;)
+DEMO_SRC := src/demo.cpp src/ball.cpp
 
-.PHONY: all
-all: $(EXE)
-
-$(EXE): %: %.cpp | build
+demo: build
 ifeq ($(OS), Linux)
-	$(CXX) $< -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/$@
+	$(CXX) $(DEMO_SRC) -lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o build/demo
 endif
 ifeq ($(OS), Darwin)
-	$(CXX) $< `pkg-config --libs --cflags raylib` -std=c++11 -o build/$@
+	$(CXX) $(DEMO_SRC) `pkg-config --libs --cflags raylib` -std=c++11 -o build/demo
 endif
 
 build:
